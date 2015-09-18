@@ -2630,7 +2630,7 @@ JK_STATIC_INLINE int jk_object_class(JKEncodeState *encodeState, id object) {
   }
   else {
 #endif
-    void     *objectISA = *((void **)object);
+    void     *objectISA = object_getClass(object);
     
          if(JK_EXPECT_T(objectISA == encodeState->fastClassLookup.stringClass))     { return(JKClassString);     }
     else if(JK_EXPECT_T(objectISA == encodeState->fastClassLookup.numberClass))     { return(JKClassNumber);     }
@@ -2660,7 +2660,7 @@ JK_STATIC_INLINE BOOL jk_object_is_string(JKEncodeState *encodeState, id object)
   }
   else {
 #endif
-    void     *objectISA = *((void **)object);
+    void     *objectISA = object_getClass(object);
     
     if(JK_EXPECT_T(objectISA == encodeState->fastClassLookup.stringClass)) {                                                       return(YES); }
     else if(JK_EXPECT_T([object isKindOfClass:[NSString class]]))          { encodeState->fastClassLookup.stringClass = objectISA; return(YES); }
